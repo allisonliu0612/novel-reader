@@ -6,89 +6,33 @@
 <title>77の書架</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-:root{
-  --bg:#faf8f4;--bg2:#f2efe8;--bg3:#e8e3d8;
-  --text:#1c1a16;--text2:#5a5449;--text3:#9a9187;
-  --border:rgba(0,0,0,0.09);--card:#fff;--nav:#fff;
-  --accent:#7c6fcd;
-  --reader-bg:#fdf9f0;--reader-text:#2d2416;
-  --shadow:0 2px 10px rgba(0,0,0,0.08);
-}
-.dark{
-  --bg:#141210;--bg2:#1c1a16;--bg3:#26231e;
-  --text:#e8e2d6;--text2:#9a9187;--text3:#605a52;
-  --border:rgba(255,255,255,0.07);--card:#1e1c18;--nav:#161410;
-  --accent:#a59ee0;
-  --reader-bg:#120f0a;--reader-text:#d0c4ae;
-  --shadow:0 2px 10px rgba(0,0,0,0.3);
-}
+:root{--bg:#faf8f4;--bg2:#f2efe8;--bg3:#e8e3d8;--text:#1c1a16;--text2:#5a5449;--text3:#9a9187;--border:rgba(0,0,0,0.09);--card:#fff;--nav:#fff;--accent:#7c6fcd;--reader-bg:#fdf9f0;--reader-text:#2d2416;--shadow:0 2px 10px rgba(0,0,0,0.08)}
+.dark{--bg:#141210;--bg2:#1c1a16;--bg3:#26231e;--text:#e8e2d6;--text2:#9a9187;--text3:#605a52;--border:rgba(255,255,255,0.07);--card:#1e1c18;--nav:#161410;--accent:#a59ee0;--reader-bg:#120f0a;--reader-text:#d0c4ae;--shadow:0 2px 10px rgba(0,0,0,0.3)}
 html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,'PingFang TC','Heiti TC',sans-serif;transition:background .3s,color .3s}
 .app{display:flex;flex-direction:column;height:100dvh;max-width:480px;margin:0 auto;background:var(--bg)}
-
-/* topbar */
 .topbar{display:flex;align-items:center;justify-content:space-between;padding:14px 18px 12px;background:var(--nav);border-bottom:0.5px solid var(--border);flex-shrink:0}
 .topbar-logo{font-size:18px;font-weight:700;color:var(--text);letter-spacing:.04em}
 .topbar-logo em{color:var(--accent);font-style:normal}
 .icon-btn{background:none;border:none;cursor:pointer;color:var(--text2);padding:6px;border-radius:10px;display:flex;align-items:center;justify-content:center;transition:background .15s}
 .icon-btn:active{background:var(--bg3)}
-
-/* tabs */
 .tab-bar{display:flex;background:var(--nav);border-bottom:0.5px solid var(--border);flex-shrink:0}
 .tab{flex:1;padding:10px 0 9px;text-align:center;font-size:12px;color:var(--text3);cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:3px}
 .tab.active{color:var(--accent);border-bottom-color:var(--accent);font-weight:500}
-
-/* content */
 .content{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
 .section{padding:16px 18px 32px}
 .section-label{font-size:11px;font-weight:500;color:var(--text3);letter-spacing:.06em;margin-bottom:12px}
-
-/* genre */
 .genre-row{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:18px}
 .genre-tag{padding:6px 14px;border-radius:20px;font-size:13px;border:0.5px solid var(--border);background:var(--bg2);color:var(--text2);cursor:pointer;transition:all .2s;font-family:inherit}
 .genre-tag.active{background:var(--accent);color:#fff;border-color:var(--accent)}
-
-/* ★ 書封：固定寬高比 3:4，用 table-cell 技巧確保 iOS Safari 完全一致 */
 .book-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 .book-card{cursor:pointer;min-width:0}
 .book-card:active .book-cover{opacity:.85}
-.book-cover{
-  display:block;
-  width:100%;
-  position:relative;
-  border-radius:9px;
-  overflow:hidden;
-  background:var(--c,#7c6fcd);
-  box-shadow:var(--shadow);
-}
-/* 用 before 撐開 3:4 比例，完全不受文字影響 */
-.book-cover::before{
-  content:'';
-  display:block;
-  padding-top:133.33%; /* 4/3 * 100 */
-}
-.book-cover-inner{
-  position:absolute;
-  inset:0;
-  background:linear-gradient(to bottom,transparent 35%,rgba(0,0,0,.62));
-  display:flex;
-  align-items:flex-end;
-  padding:8px;
-}
-.book-cover-title{
-  font-size:10.5px;
-  font-weight:500;
-  color:#fff;
-  line-height:1.4;
-  display:-webkit-box;
-  -webkit-line-clamp:3;
-  -webkit-box-orient:vertical;
-  overflow:hidden;
-  word-break:break-all;
-}
+.book-cover{display:block;width:100%;position:relative;border-radius:9px;overflow:hidden;background:var(--c,#7c6fcd);box-shadow:var(--shadow)}
+.book-cover::before{content:'';display:block;padding-top:133.33%}
+.book-cover-inner{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 35%,rgba(0,0,0,.62));display:flex;align-items:flex-end;padding:8px}
+.book-cover-title{font-size:10.5px;font-weight:500;color:#fff;line-height:1.4;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;word-break:break-all}
 .book-title{font-size:13px;font-weight:500;color:var(--text);margin-top:7px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .book-author{font-size:11px;color:var(--text3);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-
-/* reading cards */
 .reading-card{display:flex;gap:14px;background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:14px;margin-bottom:10px;cursor:pointer;box-shadow:var(--shadow);transition:background .15s}
 .reading-card:active{background:var(--bg2)}
 .reading-thumb{width:52px;height:70px;border-radius:8px;flex-shrink:0;background:var(--c,#7c6fcd);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:500;color:#fff;text-align:center;padding:5px;line-height:1.4}
@@ -99,11 +43,7 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-
 .progress-bar{height:3px;background:var(--bg3);border-radius:2px;overflow:hidden;margin-top:8px}
 .progress-fill{height:100%;background:var(--accent);border-radius:2px}
 .progress-label{font-size:11px;color:var(--text3);margin-top:4px}
-
-/* empty */
 .empty{text-align:center;padding:60px 20px;color:var(--text3);font-size:14px;line-height:1.8}
-
-/* reader */
 .reader{position:fixed;inset:0;background:var(--reader-bg);z-index:100;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .3s cubic-bezier(.4,0,.2,1)}
 .reader.open{transform:translateX(0)}
 .reader-topbar{display:flex;align-items:center;padding:12px 14px;border-bottom:0.5px solid var(--border);gap:8px;background:var(--reader-bg);flex-shrink:0}
@@ -111,12 +51,31 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-
 .reader-body{flex:1;overflow-y:auto;padding:28px 22px 16px;-webkit-overflow-scrolling:touch}
 .reader-body p{margin-bottom:1.4em;color:var(--reader-text);line-height:2.1}
 .chapter-title{font-size:17px;font-weight:700;color:var(--reader-text);margin-bottom:1.8em;padding-bottom:14px;border-bottom:0.5px solid var(--border)}
-.reader-controls{padding:12px 18px;border-top:0.5px solid var(--border);background:var(--reader-bg);display:flex;align-items:center;gap:10px;flex-shrink:0}
-.font-btn{background:none;border:0.5px solid var(--border);border-radius:8px;padding:5px 12px;cursor:pointer;color:var(--text2);font-weight:500;font-size:14px;font-family:inherit;transition:background .15s}
+.reader-controls{padding:10px 18px;border-top:0.5px solid var(--border);background:var(--reader-bg);display:flex;align-items:center;gap:8px;flex-shrink:0}
+.font-btn{background:none;border:0.5px solid var(--border);border-radius:8px;padding:5px 10px;cursor:pointer;color:var(--text2);font-weight:500;font-size:14px;font-family:inherit}
 .font-btn:active{background:var(--bg3)}
-.font-val{font-size:13px;color:var(--text2);min-width:26px;text-align:center}
-.fav-btn{background:none;border:none;cursor:pointer;padding:4px;color:var(--text3);display:flex;align-items:center;transition:color .2s}
+.font-val{font-size:13px;color:var(--text2);min-width:24px;text-align:center}
+.fav-btn{background:none;border:none;cursor:pointer;padding:4px;color:var(--text3);display:flex;align-items:center}
 .fav-btn.on{color:#e24b4a}
+.chapter-nav{display:flex;align-items:center;justify-content:space-between;padding:10px 18px;border-top:0.5px solid var(--border);background:var(--reader-bg);flex-shrink:0;gap:8px}
+.nav-btn{flex:1;padding:9px 0;border-radius:10px;border:0.5px solid var(--border);background:var(--bg2);color:var(--text2);font-size:13px;font-family:inherit;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px}
+.nav-btn:active{background:var(--bg3)}
+.nav-btn.next-btn{background:var(--accent);color:#fff;border-color:var(--accent)}
+.nav-btn:disabled{opacity:.35;cursor:not-allowed}
+.chapter-info{font-size:12px;color:var(--text3);text-align:center;min-width:60px}
+.generating{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 20px;gap:16px}
+.spinner{width:28px;height:28px;border:2.5px solid var(--bg3);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.generating-text{font-size:14px;color:var(--text3);line-height:1.8;text-align:center}
+.api-modal{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,0.5);display:none;align-items:flex-end;justify-content:center}
+.api-modal.show{display:flex}
+.api-sheet{background:var(--card);border-radius:20px 20px 0 0;padding:28px 24px 40px;width:100%;max-width:480px;font-family:inherit}
+.api-sheet h3{font-size:17px;font-weight:600;color:var(--text);margin-bottom:8px}
+.api-sheet p{font-size:13px;color:var(--text3);line-height:1.7;margin-bottom:16px}
+.api-input{width:100%;padding:12px 14px;border:0.5px solid var(--border);border-radius:10px;font-size:14px;font-family:inherit;background:var(--bg2);color:var(--text);outline:none;margin-bottom:12px}
+.api-input:focus{border-color:var(--accent)}
+.api-save-btn{width:100%;padding:13px;background:var(--accent);color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:500;font-family:inherit;cursor:pointer}
+.api-note{font-size:11px;color:var(--text3);text-align:center;margin-top:10px;line-height:1.6}
 </style>
 </head>
 <body>
@@ -128,31 +87,19 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-
     </button>
   </div>
   <div class="tab-bar">
-    <div class="tab active" data-tab="discover">
-      <svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>探索
-    </div>
-    <div class="tab" data-tab="reading">
-      <svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>閱讀中
-    </div>
-    <div class="tab" data-tab="shelf">
-      <svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="7" height="18" rx="1"/><rect x="9.5" y="3" width="5" height="18" rx="1"/><rect x="16" y="3" width="6" height="18" rx="1"/></svg>書架
-    </div>
-    <div class="tab" data-tab="fav">
-      <svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>收藏
-    </div>
+    <div class="tab active" data-tab="discover"><svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>探索</div>
+    <div class="tab" data-tab="reading"><svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>閱讀中</div>
+    <div class="tab" data-tab="shelf"><svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="7" height="18" rx="1"/><rect x="9.5" y="3" width="5" height="18" rx="1"/><rect x="16" y="3" width="6" height="18" rx="1"/></svg>書架</div>
+    <div class="tab" data-tab="fav"><svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>收藏</div>
   </div>
   <div class="content" id="main"></div>
 </div>
 
 <div class="reader" id="reader">
   <div class="reader-topbar">
-    <button class="icon-btn" id="rBack" aria-label="返回">
-      <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-    </button>
+    <button class="icon-btn" id="rBack" aria-label="返回"><svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></button>
     <span class="reader-title" id="rTitle"></span>
-    <button class="fav-btn" id="rFav" aria-label="收藏">
-      <svg id="rFavIco" viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-    </button>
+    <button class="fav-btn" id="rFav" aria-label="收藏"><svg id="rFavIco" viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
   </div>
   <div class="reader-body" id="rBody"></div>
   <div class="reader-controls">
@@ -160,130 +107,95 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-
     <button class="font-btn" id="fDec">A−</button>
     <span class="font-val" id="fVal">18</span>
     <button class="font-btn" id="fInc">A+</button>
-    <div style="margin-left:auto;display:flex;align-items:center;gap:8px">
+    <div style="margin-left:auto;display:flex;align-items:center;gap:6px">
       <span style="font-size:12px;color:var(--text3)">夜間</span>
-      <button class="icon-btn" id="rTheme" aria-label="切換日夜">
-        <svg id="rThemeIco" viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-      </button>
+      <button class="icon-btn" id="rTheme" aria-label="切換日夜"><svg id="rThemeIco" viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
+      <button class="icon-btn" id="apiKeyBtn" aria-label="API設定" title="設定AI金鑰"><svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg></button>
     </div>
+  </div>
+  <div class="chapter-nav">
+    <button class="nav-btn" id="prevBtn" disabled><svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>上一章</button>
+    <span class="chapter-info" id="chapterInfo">第 1 章</span>
+    <button class="nav-btn next-btn" id="nextBtn">下一章<svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
+  </div>
+</div>
+
+<div class="api-modal" id="apiModal">
+  <div class="api-sheet">
+    <h3>🔑 設定 Gemini API 金鑰</h3>
+    <p>AI 續寫功能需要 Google Gemini API 金鑰（免費）。金鑰只儲存在你自己的瀏覽器裡，不會傳送到任何地方。</p>
+    <input class="api-input" id="apiInput" type="password" placeholder="AIzaSy..." />
+    <button class="api-save-btn" id="apiSave">儲存並開始使用</button>
+    <p class="api-note">沒有金鑰？前往 <a href="https://aistudio.google.com" target="_blank" style="color:var(--accent)">aistudio.google.com</a> 免費申請</p>
   </div>
 </div>
 
 <script>
 const BOOKS=[
-  {id:1,title:'女配攻略',author:'半優雅灬半瘋癲',genre:'快穿',color:'#8B3A5A',progress:45,fav:true,
-   content:'第一章　第十次\n\n睜開眼的瞬間，夜華裳做的第一件事，是數手指。\n\n十根，都在。\n\n好。她深吸一口氣，坐起身。床帳是熟悉的朱紅色，窗外是熟悉的梅花香，角落裏是熟悉的銅鏡——她又回來了。\n\n第十次。\n\n她盯著銅鏡裏的臉看了很久。容顏是美的，眉目如畫，膚若凝脂，可惜這副皮囊這輩子又要陪她去死一次——不對，這一次不一樣了。\n\n系統的提示音適時在腦海裏響起：【宿主，第十次輪迴啟動。本次契約：單刷所有副本，存活率達標即可解綁。】\n\n「達標是多少？」她問。\n\n【活著出去就算。】\n\n夜華裳沉默了兩秒，然後笑了。這個笑容跟前九次那個總是算計謀劃卻落得淒慘收場的她，完全不一樣。\n\n「好，」她掀開被子，語氣前所未有的輕鬆，「這次，我們換個玩法。」'},
-  {id:2,title:'每天都在被超英公開處刑',author:'（同人）',genre:'綜英美',color:'#2A5FA5',progress:72,fav:true,
-   content:'第一章　兵人說話了\n\n那天是個普通的週三下午。\n\n羅羅趴在書桌上寫作業，寫到一半習慣性地抬頭看了一眼書架——十二個超英兵人整整齊齊站成一排，在下午三點的陽光裏閃著光。\n\n她最愛的那個，美國隊長，站在最中間。\n\n「你的作業第三題錯了。」\n\n羅羅手裏的筆掉在地上。\n\n她眨了眨眼。美國隊長還是那個樣子，盾牌，制服，帥氣的小臉，完全沒有任何「我剛才說話了」的跡象。\n\n羅羅撿起筆，重新趴下，心想：我幻聽了。\n\n「不是幻聽，第三題真的錯了，二次函數的頂點你算反了。」\n\n這次羅羅直接從椅子上站起來，指著美國隊長，嘴脣抖了半天，才擠出一句話：「你……你說什麼？」\n\n「我說，」十二公分高的兵人抬起頭，字正腔圓地說，「你作業，寫錯了。」\n\n羅羅沉默了三秒，然後衝去門口大喊：「媽！我數學進步了！兵人都看不下去了！」'},
-  {id:3,title:'頂流他又在黏我',author:'糖炒板栗',genre:'現代',color:'#2E7D52',progress:28,fav:false,
-   content:'第一章　一隻貓\n\n那隻貓卡在排水溝蓋子上的時候，顧念正在趕通告。\n\n她本來可以不管的。已經遲到十分鐘，副導那邊電話催了三次——理智告訴她：走過去，別管。\n\n然後她就蹲下來把貓拎出來了。\n\n橘貓，胖，不知道怎麼把後腿卡進了鐵柵格，正在用一種「你怎麼才來」的眼神看她。\n\n「你也知道在這裏等人救啊？」顧念把貓塞進懷裏，「我要遲到了，你能不能自己走？」\n\n橘貓喵了一聲。\n\n她嘆口氣，拿出手機想搜附近動物醫院，結果後面有人說話了：「是橘子。」\n\n聲音很好聽，顧念下意識轉頭，然後愣住了。她認識這張臉——他的海報貼在她宿舍牆上整整貼了兩年。'},
-  {id:4,title:'穿成炮灰師尊後',author:'月下清霜',genre:'古風',color:'#5A3EA0',progress:0,fav:false,
-   content:'第一章　炮灰師尊上線\n\n沈青第一次清醒過來，是在一個洞府裏。\n\n四壁石牆，陣法隱隱流光，角落裏放著一個蒲團，上面有一個正在打坐的——小孩。\n\n沈青：？\n\n她低頭看了看自己，白衣廣袖，腰間掛著一枚墨玉令牌，刻著兩個字：清虛。\n\n她想起來了。她穿書了，穿進了她上個月剛追完的那本修仙爽文，成了裏頭一個在第十八章就領了便當的炮灰師尊。\n\n她視線移回那個正在打坐的小孩。七八歲，劍眉星目，這就是日後那個背刺她的徒弟，謝長淵。\n\n現在他還是個豆丁。\n\n沈青想了三秒鐘，然後輕手輕腳地開始收拾包袱。'},
-  {id:5,title:'我在異世界開醫館',author:'柚子茶拿鐵',genre:'系統',color:'#1A6B6B',progress:0,fav:false,
-   content:'第一章　開業第一天\n\n系統給她的第一個任務世界，是個到處都在打架的地方。\n\n白芷站在醫館門口，看著牌匾——「白氏醫館，歡迎光臨」——再看了看遠處正在空中互扔忍術的兩個人，深吸一口氣。\n\n【系統提示：請於本世界完成五十個診療任務，達成率80%以上即可解鎖下一副本。】\n\n「知道了，」她轉身進門，「就是不知道第一個客人是哪位。」\n\n她剛坐定，門就被撞開了。一個銀髮少年跌進來，身上有三處刀傷，表情是那種努力撐著不讓自己倒的樣子。\n\n「你是醫者？」他問。\n\n「是，」白芷已經開始準備藥材，「上來躺著，先不要說話，出血量不少。」'},
-  {id:6,title:'轉學生是我的狗',author:'奶茶加珍珠',genre:'校園',color:'#B06020',progress:55,fav:true,
-   content:'第一章　不對勁的轉學生\n\n喬依的狗是在某個下雨天失蹤的。她找了三天，貼了五十張尋狗啟事，什麼都沒有。\n\n第四天，班上來了個轉學生。\n\n老師說他叫陳晝，從外地轉來。男生，高，頭髮有點亂，看上去是那種喬依絕對不會主動搭話的類型。\n\n然後他走進教室，視線在人群裏掃了一圈，最後停在喬依臉上。\n\n那個眼神。喬依後背一涼。那個眼神她認識——每天早上她打開房門，她的狗用那種「你終於出現了」的眼神看她。現在這個陌生男生，用的是同一個眼神。\n\n轉學生走到旁邊坐下，極其自然地側過頭輕聲問：「昨晚睡得好嗎？」\n\n喬依：「……你認識我？」\n\n他歪了歪頭。那個動作，和她的狗困惑的時候一模一樣。'}
+  {id:1,title:'女配攻略',author:'半優雅灬半瘋癲',genre:'快穿',color:'#8B3A5A',progress:45,fav:true,desc:'整整九次輪迴，每次都因女主而死。第十次，夜華裳決定做沒良心的真小人，坑蒙拐騙單刷副本，圓潤滾回二十一世紀！',chapters:[{title:'第一章　第十次',content:'睜開眼的瞬間，夜華裳做的第一件事，是數手指。\n\n十根，都在。\n\n好。她深吸一口氣，坐起身。床帳是熟悉的朱紅色，窗外是熟悉的梅花香，角落裏是熟悉的銅鏡——她又回來了。\n\n第十次。\n\n她盯著銅鏡裏的臉看了很久。容顏是美的，眉目如畫，膚若凝脂，可惜這副皮囊這輩子又要陪她去死一次——不對，這一次不一樣了。\n\n系統的提示音適時在腦海裏響起：【宿主，第十次輪迴啟動。本次契約：單刷所有副本，存活率達標即可解綁。】\n\n「達標是多少？」她問。\n\n【活著出去就算。】\n\n夜華裳沉默了兩秒，然後笑了。這個笑容跟前九次那個總是算計謀劃卻落得淒慘收場的她，完全不一樣。\n\n「好，」她掀開被子，語氣前所未有的輕鬆，「這次，我們換個玩法。」'}]},
+  {id:2,title:'每天都在被超英公開處刑',author:'（同人）',genre:'綜英美',color:'#2A5FA5',progress:72,fav:true,desc:'羅羅是超英粉，直到兵人開口說話。以為能談精神戀愛，結果超英叫她去買老婆。世界融合後，雞飛狗跳的日子才剛開始……',chapters:[{title:'第一章　兵人說話了',content:'那天是個普通的週三下午。\n\n羅羅趴在書桌上寫作業，寫到一半習慣性地抬頭看了一眼書架——十二個超英兵人整整齊齊站成一排，在下午三點的陽光裏閃著光。\n\n她最愛的那個，美國隊長，站在最中間。\n\n「你的作業第三題錯了。」\n\n羅羅手裏的筆掉在地上。\n\n她眨了眨眼。美國隊長還是那個樣子，完全沒有任何「我剛才說話了」的跡象。\n\n羅羅撿起筆，重新趴下，心想：我幻聽了。\n\n「不是幻聽，第三題真的錯了，二次函數的頂點你算反了。」\n\n這次羅羅直接從椅子上站起來，指著美國隊長，嘴脣抖了半天，才擠出一句話：「你……你說什麼？」\n\n「我說，」十二公分高的兵人抬起頭，字正腔圓地說，「你作業，寫錯了。」\n\n羅羅沉默了三秒，然後衝去門口大喊：「媽！我數學進步了！兵人都看不下去了！」'}]},
+  {id:3,title:'頂流他又在黏我',author:'糖炒板栗',genre:'現代',color:'#2E7D52',progress:28,fav:false,desc:'顧念救了一隻橘貓，貓的主人是娛樂圈頂流。對方說欠她一個人情，從此各種奇怪地出現在她生活裏……',chapters:[{title:'第一章　一隻貓',content:'那隻貓卡在排水溝蓋子上的時候，顧念正在趕通告。\n\n她本來可以不管的。已經遲到十分鐘，副導那邊電話催了三次——理智告訴她：走過去，別管。\n\n然後她就蹲下來把貓拎出來了。\n\n橘貓，胖，不知道怎麼把後腿卡進了鐵柵格，正在用一種「你怎麼才來」的眼神看她。\n\n「你也知道在這裏等人救啊？」顧念把貓塞進懷裏，「我要遲到了，你能不能自己走？」\n\n橘貓喵了一聲。\n\n她嘆口氣，拿出手機想搜附近動物醫院，結果後面有人說話了：「是橘子。」\n\n聲音很好聽，顧念下意識轉頭，然後愣住了。她認識這張臉——他的海報貼在她宿舍牆上整整貼了兩年。'}]},
+  {id:4,title:'穿成炮灰師尊後',author:'月下清霜',genre:'古風',color:'#5A3EA0',progress:0,fav:false,desc:'沈青穿成修仙文裏的炮灰師尊，原著結局是被徒弟背刺殞道。但她發現徒弟還是個小豆丁時，決定：先跑！',chapters:[{title:'第一章　炮灰師尊上線',content:'沈青第一次清醒過來，是在一個洞府裏。\n\n四壁石牆，陣法隱隱流光，角落裏放著一個蒲團，上面有一個正在打坐的——小孩。\n\n沈青：？\n\n她低頭看了看自己，白衣廣袖，腰間掛著一枚墨玉令牌，刻著兩個字：清虛。\n\n她想起來了。她穿書了，穿進了她上個月剛追完的那本修仙爽文，成了裏頭一個在第十八章就領了便當的炮灰師尊。\n\n她視線移回那個正在打坐的小孩。七八歲，劍眉星目，這就是日後那個背刺她的徒弟，謝長淵。\n\n現在他還是個豆丁。\n\n沈青想了三秒鐘，然後輕手輕腳地開始收拾包袱。'}]},
+  {id:5,title:'我在異世界開醫館',author:'柚子茶拿鐵',genre:'系統',color:'#1A6B6B',progress:0,fav:false,desc:'白芷帶著醫館系統穿越，要求她在各個次元行醫完成任務。第一站：全是傷的忍者世界……',chapters:[{title:'第一章　開業第一天',content:'系統給她的第一個任務世界，是個到處都在打架的地方。\n\n白芷站在醫館門口，看著牌匾——「白氏醫館，歡迎光臨」——再看了看遠處正在空中互扔忍術的兩個人，深吸一口氣。\n\n【系統提示：請於本世界完成五十個診療任務，達成率80%以上即可解鎖下一副本。】\n\n「知道了，」她轉身進門，「就是不知道第一個客人是哪位。」\n\n她剛坐定，門就被撞開了。一個銀髮少年跌進來，身上有三處刀傷，表情是那種努力撐著不讓自己倒的樣子。\n\n「你是醫者？」他問。\n\n「是，」白芷已經開始準備藥材，「上來躺著，先不要說話，出血量不少。」'}]},
+  {id:6,title:'轉學生是我的狗',author:'奶茶加珍珠',genre:'校園',color:'#B06020',progress:55,fav:true,desc:'喬依養了兩個月的狗突然不見，隔天班上出現一個轉學生，他看她的眼神和她的狗一模一樣……',chapters:[{title:'第一章　不對勁的轉學生',content:'喬依的狗是在某個下雨天失蹤的。她找了三天，貼了五十張尋狗啟事，什麼都沒有。\n\n第四天，班上來了個轉學生。\n\n老師說他叫陳晝，從外地轉來。男生，高，頭髮有點亂，看上去是那種喬依絕對不會主動搭話的類型。\n\n然後他走進教室，視線在人群裏掃了一圈，最後停在喬依臉上。\n\n那個眼神。喬依後背一涼。那個眼神她認識——每天早上她打開房門，她的狗用那種「你終於出現了」的眼神看她。\n\n轉學生走到旁邊坐下，極其自然地側過頭輕聲問：「昨晚睡得好嗎？」\n\n喬依：「……你認識我？」\n\n他歪了歪頭。那個動作，和她的狗困惑的時候一模一樣。'}]}
 ];
 
 const GENRES=['全部','快穿','綜英美','現代','古風','系統','校園'];
-let tab='discover',genre='全部',dark=false,fs=18,cur=null;
-
+let tab='discover',genre='全部',dark=false,fs=18,cur=null,curChapter=0,generating=false;
 const $=id=>document.getElementById(id);
 const filtered=()=>genre==='全部'?BOOKS:BOOKS.filter(b=>b.genre===genre);
-
-function cover(b){
-  return`<div class="book-cover" style="--c:${b.color}"><div class="book-cover-inner"><span class="book-cover-title">${b.title}</span></div></div>`;
+function getKey(){return localStorage.getItem('anthropic_key')||''}
+function saveKey(k){localStorage.setItem('anthropic_key',k)}
+function cover(b){return`<div class="book-cover" style="--c:${b.color}"><div class="book-cover-inner"><span class="book-cover-title">${b.title}</span></div></div>`}
+function bookCard(b){return`<div class="book-card" data-id="${b.id}">${cover(b)}<div class="book-title">${b.title}</div><div class="book-author">${b.author}</div></div>`}
+function renderDiscover(){return`<div class="section"><div class="genre-row">${GENRES.map(g=>`<button class="genre-tag${g===genre?' active':''}" data-g="${g}">${g}</button>`).join('')}</div><div class="section-label">書單</div><div class="book-grid">${filtered().map(bookCard).join('')}</div></div>`}
+function renderReading(){const list=BOOKS.filter(b=>b.progress>0);if(!list.length)return`<div class="empty">還沒有閱讀中的書<br>去探索頁找一本吧 📖</div>`;return`<div class="section"><div class="section-label">繼續閱讀</div>${list.map(b=>`<div class="reading-card" data-id="${b.id}"><div class="reading-thumb" style="--c:${b.color}">${b.title}</div><div class="reading-info"><div><div class="reading-title">${b.title}</div><div class="reading-meta">${b.author}<span class="genre-pill">${b.genre}</span></div></div><div><div class="progress-bar"><div class="progress-fill" style="width:${b.progress}%"></div></div><div class="progress-label">已讀 ${b.progress}% · 共 ${b.chapters.length} 章</div></div></div></div>`).join('')}</div>`}
+function renderShelf(){return`<div class="section"><div class="section-label">全部（${BOOKS.length}本）</div><div class="book-grid">${BOOKS.map(bookCard).join('')}</div></div>`}
+function renderFav(){const list=BOOKS.filter(b=>b.fav);if(!list.length)return`<div class="empty">還沒有收藏<br>閱讀時點右上角 ❤️ 收藏</div>`;return`<div class="section"><div class="section-label">我的收藏（${list.length}本）</div><div class="book-grid">${list.map(bookCard).join('')}</div></div>`}
+function draw(){const m=$('main');if(tab==='discover')m.innerHTML=renderDiscover();else if(tab==='reading')m.innerHTML=renderReading();else if(tab==='shelf')m.innerHTML=renderShelf();else m.innerHTML=renderFav();m.querySelectorAll('[data-id]').forEach(el=>el.addEventListener('click',()=>openReader(+el.dataset.id)));m.querySelectorAll('[data-g]').forEach(el=>el.addEventListener('click',()=>{genre=el.dataset.g;draw()}))}
+function setFav(){const on=cur&&cur.fav;$('rFav').classList.toggle('on',on);$('rFavIco').style.fill=on?'#e24b4a':'none';$('rFavIco').style.stroke=on?'#e24b4a':'currentColor'}
+function renderChapter(){const ch=cur.chapters[curChapter];const body=$('rBody');body.innerHTML=`<p class="chapter-title">${ch.title}</p>`+ch.content.split('\n').filter(p=>p.trim()).map(p=>`<p>${p}</p>`).join('');body.scrollTop=0;$('chapterInfo').textContent=`第 ${curChapter+1} 章`;$('prevBtn').disabled=curChapter===0;$('nextBtn').disabled=generating;$('nextBtn').innerHTML=`下一章<svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>`}
+function openReader(id){cur=BOOKS.find(b=>b.id===id);if(!cur)return;curChapter=0;$('rTitle').textContent=cur.title;$('fVal').textContent=fs;$('rBody').style.fontSize=fs+'px';setFav();renderChapter();$('reader').classList.add('open')}
+async function generateNextChapter(){
+  if(generating)return;
+  const key=getKey();
+  if(!key){$('apiModal').classList.add('show');return}
+  generating=true;$('nextBtn').disabled=true;$('prevBtn').disabled=true;
+  const nextNum=cur.chapters.length+1;
+  const lastTwo=cur.chapters.slice(-2).map(c=>`${c.title}\n${c.content}`).join('\n\n---\n\n');
+  $('rBody').innerHTML=`<div class="generating"><div class="spinner"></div><div class="generating-text">AI 正在續寫第 ${nextNum} 章…<br><span style="font-size:12px;opacity:.6">約需 15-20 秒</span></div></div>`;
+  $('chapterInfo').textContent=`第 ${nextNum} 章`;
+  try{
+    const prompt=`你是擅長寫${cur.genre}小說的作家，請以繁體中文續寫以下小說。\n\n書名：${cur.title}\n作者：${cur.author}\n簡介：${cur.desc}\n\n最近章節：\n${lastTwo}\n\n請續寫第${nextNum}章，要求：\n1. 繁體中文，約2000字\n2. 開頭格式：「第${nextNum}章　[章節標題]」\n3. 自然承接上一章情節\n4. 文風輕鬆有趣帶爽感，符合${cur.genre}風格\n5. 對話生動，人物性格鮮明\n6. 直接輸出章節內容，不要任何說明或前言`;
+    const resp=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${key}`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({contents:[{parts:[{text:prompt}]}],generationConfig:{maxOutputTokens:2500,temperature:0.9}})});
+    if(!resp.ok){const err=await resp.json();throw new Error(err.error?.message||'API錯誤')}
+    const data=await resp.json();
+    const raw=data.candidates[0].content.parts[0].text.trim();
+    const lines=raw.split('\n');
+    const titleLine=lines[0].trim();
+    const content=lines.slice(1).join('\n').trim();
+    cur.chapters.push({title:titleLine,content});
+    curChapter=cur.chapters.length-1;
+    renderChapter();
+  }catch(e){
+    $('rBody').innerHTML=`<div class="generating"><div style="font-size:32px">⚠️</div><div class="generating-text">續寫失敗<br><span style="font-size:12px;color:var(--text3)">${e.message}</span><br><br><button onclick="generateNextChapter()" style="padding:8px 20px;border-radius:8px;border:0.5px solid var(--border);background:var(--bg2);color:var(--text2);font-size:13px;font-family:inherit;cursor:pointer">重試</button></div></div>`;
+  }finally{generating=false;$('nextBtn').disabled=false;$('prevBtn').disabled=curChapter===0}
 }
-
-function bookCard(b){
-  return`<div class="book-card" data-id="${b.id}">${cover(b)}<div class="book-title">${b.title}</div><div class="book-author">${b.author}</div></div>`;
-}
-
-function renderDiscover(){
-  return`<div class="section">
-    <div class="genre-row">${GENRES.map(g=>`<button class="genre-tag${g===genre?' active':''}" data-g="${g}">${g}</button>`).join('')}</div>
-    <div class="section-label">書單</div>
-    <div class="book-grid">${filtered().map(bookCard).join('')}</div>
-  </div>`;
-}
-
-function renderReading(){
-  const list=BOOKS.filter(b=>b.progress>0);
-  if(!list.length)return`<div class="empty">還沒有閱讀中的書<br>去探索頁找一本吧 📖</div>`;
-  return`<div class="section"><div class="section-label">繼續閱讀</div>${list.map(b=>`
-    <div class="reading-card" data-id="${b.id}">
-      <div class="reading-thumb" style="--c:${b.color}">${b.title}</div>
-      <div class="reading-info">
-        <div><div class="reading-title">${b.title}</div>
-        <div class="reading-meta">${b.author}<span class="genre-pill">${b.genre}</span></div></div>
-        <div><div class="progress-bar"><div class="progress-fill" style="width:${b.progress}%"></div></div>
-        <div class="progress-label">已讀 ${b.progress}%</div></div>
-      </div>
-    </div>`).join('')}</div>`;
-}
-
-function renderShelf(){
-  return`<div class="section"><div class="section-label">全部（${BOOKS.length}本）</div>
-    <div class="book-grid">${BOOKS.map(bookCard).join('')}</div></div>`;
-}
-
-function renderFav(){
-  const list=BOOKS.filter(b=>b.fav);
-  if(!list.length)return`<div class="empty">還沒有收藏<br>閱讀時點右上角 ❤️ 收藏</div>`;
-  return`<div class="section"><div class="section-label">我的收藏（${list.length}本）</div>
-    <div class="book-grid">${list.map(bookCard).join('')}</div></div>`;
-}
-
-function draw(){
-  const m=$('main');
-  if(tab==='discover')m.innerHTML=renderDiscover();
-  else if(tab==='reading')m.innerHTML=renderReading();
-  else if(tab==='shelf')m.innerHTML=renderShelf();
-  else m.innerHTML=renderFav();
-  m.querySelectorAll('[data-id]').forEach(el=>el.addEventListener('click',()=>openReader(+el.dataset.id)));
-  m.querySelectorAll('[data-g]').forEach(el=>el.addEventListener('click',()=>{genre=el.dataset.g;draw()}));
-}
-
-function setFav(){
-  const on=cur&&cur.fav;
-  $('rFav').classList.toggle('on',on);
-  $('rFavIco').style.fill=on?'#e24b4a':'none';
-  $('rFavIco').style.stroke=on?'#e24b4a':'currentColor';
-}
-
-function openReader(id){
-  cur=BOOKS.find(b=>b.id===id);if(!cur)return;
-  $('rTitle').textContent=cur.title;
-  const body=$('rBody');
-  body.style.fontSize=fs+'px';
-  body.innerHTML=cur.content.split('\n').map((p,i)=>
-    p.trim()?(i===0?`<p class="chapter-title">${p}</p>`:`<p>${p}</p>`):'').join('');
-  body.scrollTop=0;
-  $('fVal').textContent=fs;
-  setFav();
-  $('reader').classList.add('open');
-}
-
-document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
-  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
-  t.classList.add('active');tab=t.dataset.tab;draw();
-}));
-
-function setThemeIcons(){
-  const moon=`<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>`;
-  const sun=`<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>`;
-  [$('themeIco'),$('rThemeIco')].forEach(el=>{el.innerHTML=dark?sun:moon});
-}
-
+document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));t.classList.add('active');tab=t.dataset.tab;draw()}));
+function setThemeIcons(){const moon=`<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>`;const sun=`<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>`;[$('themeIco'),$('rThemeIco')].forEach(el=>{el.innerHTML=dark?sun:moon})}
 function toggleDark(){dark=!dark;document.body.classList.toggle('dark',dark);setThemeIcons()}
-
 $('themeBtn').addEventListener('click',toggleDark);
 $('rTheme').addEventListener('click',toggleDark);
-$('rBack').addEventListener('click',()=>{$('reader').classList.remove('open')});
+$('rBack').addEventListener('click',()=>{$('reader').classList.remove('open');draw()});
 $('rFav').addEventListener('click',()=>{if(cur){cur.fav=!cur.fav;setFav()}});
 $('fInc').addEventListener('click',()=>{if(fs<28){fs+=2;$('rBody').style.fontSize=fs+'px';$('fVal').textContent=fs}});
 $('fDec').addEventListener('click',()=>{if(fs>14){fs-=2;$('rBody').style.fontSize=fs+'px';$('fVal').textContent=fs}});
-
+$('prevBtn').addEventListener('click',()=>{if(curChapter>0){curChapter--;renderChapter()}});
+$('nextBtn').addEventListener('click',()=>{if(curChapter<cur.chapters.length-1){curChapter++;renderChapter()}else{generateNextChapter()}});
+$('apiKeyBtn').addEventListener('click',()=>$('apiModal').classList.add('show'));
+$('apiSave').addEventListener('click',()=>{const v=$('apiInput').value.trim();if(v){saveKey(v);$('apiModal').classList.remove('show')}});
+$('apiModal').addEventListener('click',e=>{if(e.target===$('apiModal'))$('apiModal').classList.remove('show')});
+const saved=getKey();if(saved)$('apiInput').value=saved;
 draw();
 </script>
 </body>
